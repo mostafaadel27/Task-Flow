@@ -225,7 +225,7 @@ export default function WorkspacePage() {
               </div>
             ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {projects.map((proj) => {
+                {projects.map((proj: any) => {
                   const doneTasks = proj.tasks.filter((t: any) => t.status === 'done').length;
                   const total = proj.tasks.length;
                   const progress = Math.round((doneTasks / total) * 100);
