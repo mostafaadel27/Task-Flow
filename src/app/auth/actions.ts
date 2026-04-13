@@ -83,6 +83,9 @@ export async function signInWithProvider(formData: FormData) {
     if (error) throw error
     if (data.url) redirect(data.url)
   } catch (error: any) {
+    // If it's a redirect, let it happen
+    if (error.message === 'NEXT_REDIRECT') throw error;
+    
     console.error("OAuth Error:", error);
     const message = error.message || "Authentication service unreachable";
     redirect(`/login?error=${encodeURIComponent(message)}`);
