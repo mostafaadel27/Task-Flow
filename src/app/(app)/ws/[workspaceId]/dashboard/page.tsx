@@ -11,7 +11,7 @@ export const metadata = {
 export default async function DashboardPage({
   params
 }: {
-  params: { workspaceId: string };
+  params: Promise<{ workspaceId: string }>;
 }) {
   const { workspaceId } = await params;
   const supabase = await createClient();

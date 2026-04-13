@@ -5,7 +5,7 @@ export default async function AnalyticsLayout({
   params
 }: {
   children: React.ReactNode;
-  params: { workspaceId: string };
+  params: Promise<{ workspaceId: string }>;
 }) {
   const { workspaceId } = await params;
 
