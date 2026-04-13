@@ -64,27 +64,28 @@ export async function logout() {
 }
 
 export async function signInWithProvider(formData: FormData) {
-  const provider = formData.get('provider') as 'google' | 'github'
-  const supabase = await createClient()
+  try {
+    const provider = formData.get('provider') as 'google' | 'github'
+    const supabase = await createClient()
 
-  const headersList = await headers()
-  const host = headersList.get('host')
-  const protocol = host?.includes('localhost') ? 'http' : 'https'
-  const origin = `${protocol}://${host}` || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+    const headersList = await headers()
+    const host = headersList.get('host')
+    const protocol = host?.includes('localhost') ? 'http' : 'https'
+    const origin = `${protocol}://${host}` || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider,
-    options: {
-      redirectTo: `${origin}/auth/callback`,
-    },
-  })
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: `${origin}/auth/callback`,
+      },
+    })
 
-  if (error) {
-    redirect('/login?error=' + encodeURIComponent(error.message))
-  }
-
-  if (data.url) {
-    redirect(data.url)
+    if (error) throw error
+    if (data.url) redirect(data.url)
+  } catch (error: any) {
+    console.error("OAuth Error:", error);
+    const message = error.message || "Authentication service unreachable";
+    redirect(`/login?error=${encodeURIComponent(message)}`);
   }
 }
 
