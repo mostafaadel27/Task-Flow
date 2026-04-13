@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #f4f4f5;
+  --foreground: #18181b;
+  
+  --card: #ffffff;
+  --card-foreground: #18181b;
+  
+  --primary: #18181b;
+  --primary-foreground: #f4f4f5;
+  
+  --muted: #f4f4f5;
+  --muted-foreground: #6b6b6b;
+  
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #18181b;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: #09090b;
+  --foreground: #fafafa;
+  
+  --card: #131316;
+  --card-foreground: #fafafa;
+  
+  --primary: #fafafa;
+  --primary-foreground: #09090b;
+  
+  --muted: #1c1c1f;
+  --muted-foreground: #a1a1aa;
+  
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #fafafa;
+}
+
+
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Dialog backdrop */
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
