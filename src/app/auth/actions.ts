@@ -68,7 +68,9 @@ export async function signInWithProvider(formData: FormData) {
   const supabase = await createClient()
 
   const headersList = await headers()
-  const origin = headersList.get('origin') || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+  const host = headersList.get('host')
+  const protocol = host?.includes('localhost') ? 'http' : 'https'
+  const origin = `${protocol}://${host}` || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
