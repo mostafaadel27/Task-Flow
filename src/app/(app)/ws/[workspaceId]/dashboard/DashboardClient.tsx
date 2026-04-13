@@ -153,11 +153,15 @@ export function DashboardClient({
               {upNextTasks.map((task: any) => {
                 const project = allProjects?.find((p: any) => p.id === task.project_id);
                 return (
-                  <div key={task.id} className="p-4 border border-border/50 bg-background flex items-center justify-between group hover:border-foreground/30 transition-colors cursor-default">
+                  <Link 
+                    key={task.id} 
+                    href={`/ws/${workspaceId}/board/${task.project_id}`}
+                    className="p-4 border border-border/50 bg-background flex items-center justify-between group hover:border-foreground/30 transition-colors cursor-pointer"
+                  >
                     <div className="flex items-center gap-4 min-w-0">
                       <CircleDashed className="w-4 h-4 text-muted-foreground shrink-0 group-hover:text-primary transition-colors" />
                       <div className="flex flex-col min-w-0">
-                        <p className="text-sm font-bold uppercase tracking-tight truncate">{task.title}</p>
+                        <p className="text-sm font-bold uppercase tracking-tight truncate group-hover:text-primary transition-colors">{task.title}</p>
                         <p className="text-[10px] font-mono text-muted-foreground truncate uppercase tracking-widest mt-0.5">{project?.title || 'Unknown Project'}</p>
                       </div>
                     </div>
@@ -168,7 +172,7 @@ export function DashboardClient({
                     }`}>
                       {task.priority || 'medium'}
                     </span>
-                  </div>
+                  </Link>
                 );
               })}
             </div>

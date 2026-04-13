@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useParams } from "next/navigation";
-import { LayoutDashboard, FolderKanban, Settings, Users, ClipboardList, BarChart3, ChevronDown } from "lucide-react";
+import { LayoutDashboard, FolderKanban, Settings, Users, ClipboardList, BarChart3, ChevronDown, Plus } from "lucide-react";
 import { motion } from "framer-motion";
 import { WorkspaceRole } from "@/types/database";
 import { hasPermission, Permission } from "@/lib/permissions";
@@ -78,6 +78,15 @@ export function SidebarNav({ workspaces }: { workspaces: any[] }) {
                 {ws.workspaceName}
               </Link>
             ))}
+            <div className="h-[1px] bg-border/30 mx-2 my-2" />
+            <Link
+              href="/onboarding"
+              onClick={() => setIsWorkspaceOpen(false)}
+              className="flex items-center gap-2 px-3 py-2 rounded-md text-xs text-muted-foreground hover:bg-muted/50 hover:text-foreground transition-colors font-medium border border-dashed border-border/50 mx-1"
+            >
+              <Plus className="w-4 h-3" />
+              Create Workspace
+            </Link>
           </div>
         )}
       </div>
