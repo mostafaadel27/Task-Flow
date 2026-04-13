@@ -108,7 +108,11 @@ export function DashboardClient({
                 const progress = pTasks.length === 0 ? 0 : Math.round((pCompleted / pTasks.length) * 100);
                 
                 return (
-                  <Link key={project.id} href={`/ws/${workspaceId}/board/${project.id}`} className="group block">
+                  <Link 
+                    key={project.id} 
+                    href={role === 'member' ? `/ws/${workspaceId}/workspace` : `/ws/${workspaceId}/board/${project.id}`} 
+                    className="group block"
+                  >
                     <div className="p-4 border border-border/50 bg-background hover:border-foreground/30 transition-colors flex items-center gap-4 relative overflow-hidden">
                       <div className="flex-1 min-w-0 relative z-10">
                         <h3 className="font-bold uppercase tracking-tight truncate group-hover:text-primary transition-colors">{project.title}</h3>
@@ -155,7 +159,7 @@ export function DashboardClient({
                 return (
                   <Link 
                     key={task.id} 
-                    href={`/ws/${workspaceId}/board/${task.project_id}`}
+                    href={role === 'member' ? `/ws/${workspaceId}/workspace` : `/ws/${workspaceId}/board/${task.project_id}`}
                     className="p-4 border border-border/50 bg-background flex items-center justify-between group hover:border-foreground/30 transition-colors cursor-pointer"
                   >
                     <div className="flex items-center gap-4 min-w-0">
