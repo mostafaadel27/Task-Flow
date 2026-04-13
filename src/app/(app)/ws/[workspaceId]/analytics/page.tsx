@@ -30,7 +30,7 @@ export default function AnalyticsPage() {
 
   if (currentRole === 'member') return null;
 
-  const container = {
+  const container: any = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
@@ -38,7 +38,7 @@ export default function AnalyticsPage() {
     }
   };
 
-  const item = {
+  const item: any = {
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0, transition: { ease: [0.16, 1, 0.3, 1], duration: 0.8 } }
   };
