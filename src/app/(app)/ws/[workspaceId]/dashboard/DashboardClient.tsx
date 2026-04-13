@@ -85,7 +85,9 @@ export function DashboardClient({
         {/* Projects list */}
         <motion.section variants={item} className="space-y-6">
           <div className="flex items-end justify-between border-b border-border/50 pb-4">
-            <h2 className="text-xl font-extrabold uppercase tracking-tight">Active Projects</h2>
+            <h2 className="text-xl font-extrabold uppercase tracking-tight">
+              {role === 'member' ? 'Active Tasks' : 'Active Projects'}
+            </h2>
             <Link href={role === 'member' ? `/ws/${workspaceId}/workspace` : `/ws/${workspaceId}/projects`} className="text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors group flex items-center gap-2">
               View all <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
