@@ -86,7 +86,7 @@ export function DashboardClient({
         <motion.section variants={item} className="space-y-6">
           <div className="flex items-end justify-between border-b border-border/50 pb-4">
             <h2 className="text-xl font-extrabold uppercase tracking-tight">Active Projects</h2>
-            <Link href={role === 'member' ? "/workspace" : "/projects"} className="text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors group flex items-center gap-2">
+            <Link href={role === 'member' ? `/ws/${workspaceId}/workspace` : `/ws/${workspaceId}/projects`} className="text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors group flex items-center gap-2">
               View all <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
@@ -106,7 +106,7 @@ export function DashboardClient({
                 const progress = pTasks.length === 0 ? 0 : Math.round((pCompleted / pTasks.length) * 100);
                 
                 return (
-                  <Link key={project.id} href={`/board/${project.id}`} className="group block">
+                  <Link key={project.id} href={`/ws/${workspaceId}/board/${project.id}`} className="group block">
                     <div className="p-4 border border-border/50 bg-background hover:border-foreground/30 transition-colors flex items-center gap-4 relative overflow-hidden">
                       <div className="flex-1 min-w-0 relative z-10">
                         <h3 className="font-bold uppercase tracking-tight truncate group-hover:text-primary transition-colors">{project.title}</h3>
