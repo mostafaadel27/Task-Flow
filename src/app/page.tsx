@@ -13,17 +13,15 @@ export default async function RootPage() {
     if (user) {
       const workspaces = await getUserWorkspaces();
       
-      // If user has workspaces, go to dashboard
       if (workspaces.length > 0) {
-        redirect(`/ws/${workspaces[0].workspaceId}/dashboard`);
+        return redirect(`/ws/${workspaces[0].workspaceId}/dashboard`);
       } else {
-        // If user is new and has no workspaces, go to onboarding
-        redirect("/onboarding");
+        return redirect("/onboarding");
       }
     }
-  } catch (error) {
+  } catch (error: any) {
+    if (error.message === 'NEXT_REDIRECT') throw error;
     console.error("Supabase initialization error:", error);
-    // Continue to landing page if anything fails
   }
 
   return <LandingPage />;
