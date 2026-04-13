@@ -2,7 +2,7 @@
 
 import React, { useMemo } from 'react'
 import { useActivityLogs, ActivityLog } from '@/hooks/useActivityLogs'
-import { Loader2, Zap, Clock, User, Clipboard, Trash2, Edit3, ArrowRight } from 'lucide-react'
+import { Loader2, Zap, Clock, User, Clipboard, Trash2, Edit3, ArrowRight, CheckCircle2 } from 'lucide-react'
 
 interface ActivityTimelineProps {
   entityId?: string
