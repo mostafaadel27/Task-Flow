@@ -74,8 +74,8 @@ export function DashboardClient({
             <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-4">In Progress</span>
             <span className="text-[4rem] font-bold tracking-tighter leading-none group-hover:pl-2 transition-all duration-300">{activeTasks}</span>
           </div>
-          <div className="border border-border/50 p-6 flex flex-col justify-between bg-muted/5 group hover:bg-muted/10 transition-colors bg-foreground text-background">
-            <span className="text-xs font-mono uppercase tracking-widest opacity-60 mb-4">Completed</span>
+          <div className="border border-border/50 p-6 flex flex-col justify-between bg-white group hover:bg-white/90 transition-colors text-black">
+            <span className="text-xs font-mono uppercase tracking-widest opacity-70 mb-4">Completed</span>
             <span className="text-[4rem] font-bold tracking-tighter leading-none group-hover:pl-2 transition-all duration-300">{completedTasks}</span>
           </div>
         </motion.div>
