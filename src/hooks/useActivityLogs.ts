@@ -49,7 +49,7 @@ export function useActivityLogs(
 
       if (filters?.type && filters.type !== 'all') {
         // Special case for grouped types
-        if (filters.type === 'status_change') {
+        if (filters.type === 'status_changed') {
           query = query.in('action_type', ['status_changed', 'task_completed'])
         } else {
           query = query.eq('action_type', filters.type)

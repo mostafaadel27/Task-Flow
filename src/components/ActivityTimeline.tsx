@@ -13,10 +13,11 @@ interface ActivityTimelineProps {
 const ACTION_TYPES = [
   { id: 'all', label: 'All Operations' },
   { id: 'project_created', label: 'New Project' },
+  { id: 'project_completed', label: 'Mission Accomplished' },
   { id: 'project_deleted', label: 'Purged Project' },
   { id: 'user_joined', label: 'New Access Node (Join)' },
   { id: 'task_created', label: 'Inbound Tasks' },
-  { id: 'status_change', label: 'Progress Shifting' },
+  { id: 'status_changed', label: 'Progress Shifting' },
 ]
 
 const formatRelativeTime = (dateStr: string) => {
@@ -34,6 +35,7 @@ const formatRelativeTime = (dateStr: string) => {
 
 const getActionIcon = (type: string) => {
   if (type === 'project_created') return <Zap className="w-3 h-3 text-amber-500" />
+  if (type === 'project_completed') return <CheckCircle2 className="w-3 h-3 text-emerald-500" />
   if (type === 'project_deleted') return <Trash2 className="w-3 h-3 text-red-500" />
   if (type === 'user_joined') return <UserPlus className="w-3 h-3 text-emerald-500" />
   if (type === 'task_created') return <Clipboard className="w-3 h-3 text-sky-500" />

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createClient } from "@/utils/supabase/client";
 import { useInvitations } from "@/hooks/useInvitations";
+import { useActivityLogs } from "@/hooks/useActivityLogs";
 
 type Step = "choose" | "create" | "join";
 
@@ -20,6 +21,7 @@ export default function OnboardingPage() {
   const [feedback, setFeedback] = useState<{ type: "error" | "success"; msg: string } | null>(null);
 
   const { myInvitations, myInvitationsLoading, acceptInvitation, rejectInvitation } = useInvitations(null);
+  const { logAction } = useActivityLogs();
 
   const handleCreateWorkspace = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,6 +48,24 @@ export default function OnboardingPage() {
         .insert([{ workspace_id: ws.id, user_id: user.id, role: "owner" }]);
 
       if (memError) throw memError;
+
+      // Log activity
+      const name = user.user_metadata?.full_name || user.email?.split('@')[0] || "New Member";
+      logAction.mutate({
+        action_type: 'user_joined',
+        entity_type: 'user',
+        entity_id: user.id,
+        message: `${name} initialized a new workspace terminal`,
+        workspace_id: ws.id
+      });
+      
+      logAction.mutate({
+        action_type: 'project_created',
+        entity_type: 'workspace',
+        entity_id: ws.id,
+        message: `System: "${ws.name}" workspace context established`,
+        workspace_id: ws.id
+      });
 
       // Update user role to indicate they've completed onboarding
       await supabase.from("users").update({ role: "owner" }).eq("id", user.id);

@@ -145,6 +145,22 @@ export function useTasks(projectId: string, workspaceId?: string | null) {
             workspace_id: workspaceId,
             metadata: { updates }
           })
+
+          // Check for project completion
+          if (updates.status === 'done') {
+            const { data: allTasks } = await supabase.from('tasks').select('status').eq('project_id', projectId)
+            const remaining = allTasks?.filter(t => t.status !== 'done').length || 0
+            if (remaining === 0) {
+              const { data: proj } = await supabase.from('projects').select('title').eq('id', projectId).single()
+              logAction.mutate({
+                action_type: 'project_completed',
+                entity_type: 'project',
+                entity_id: projectId,
+                message: `${senderName} completed the mission: "${proj?.title || 'Unknown'}"`,
+                workspace_id: workspaceId
+              })
+            }
+          }
         }
       } catch (logErr) {
         console.warn("Activity log could not be recorded:", logErr)
